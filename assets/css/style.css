@@ -1,0 +1,51 @@
+Body{
+    
+        background-image: url("../images/mrBean.jpg");
+        background-position: center top;
+        background-size: 40%;    
+    
+    
+
+
+}
+
+
+
+h1{
+        color: orangered;
+        font-size: 35px;
+        text-align: center;
+}
+
+p{
+        color: black;
+        font-size: 20px;
+}
+
+/* .mainContainer{ */
+
+        /* background-color: orange;
+        width:50%;
+        margin: 100px;
+        margin-bottom: 500px;
+        padding: 300px;
+} */
+
+.jumbotron{
+        position: absolute;
+        width: 50%;
+        margin-left: 25%;
+        margin-right:25%;
+        margin-top: 05%;
+        padding: 100px;
+        background-color: aliceblue;
+      
+        color:orangered;
+        
+
+}
+
+#button.start{
+        position: center;
+       
+}
