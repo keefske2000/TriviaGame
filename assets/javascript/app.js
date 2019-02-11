@@ -1,47 +1,86 @@
-
-
-var questions = "Entertainment: Television";
+var responseResultsArray = "Entertainment: Television";
 var queryURL = "https://opentdb.com/api.php?amount=10&category=14&difficulty=easy&type=multiple";
-var currentQuestion = 0;
+var currentindex = 0;
 var correct = 0;
 var incorrect = 0;
 
-//Get questions from the api
+//Get responseResultsArray from the api
 $.ajax({
   url: queryURL,
   method: "GET"
 }).then(function (response) {
 
-  //Show me the repsone 
-  console.log(response.response_code)
 
-  //Get array of questions
-  var questions = response.results
-  console.log(questions)
-  var ans = []
+  //Show me the repsone 
+  console.log("the response is this:")
+  console.log( JSON.parse(JSON.stringify(response)))
+  console.log("*****")
+
+  //Get array of responseResultsArray
+  var responseResultsArray = response.results
+  console.log("responseResultsArray is this: ") 
+  console.log(responseResultsArray);
+  console.log("******")
+  var questionAnswerSetArrayOfObjects = []
   //Show each question and answers
-  for (var question in questions) {
-    var allAnswers = [questions[question].correct_answer]
-    for (var q in questions[question].incorrect_answers) {
-      allAnswers.push(questions[question].incorrect_answers[q])
+  for (var index in responseResultsArray) {
+    console.log("index var in forloop is this: ")
+    console.log(index)
+    console.log("*********")
+    var allAnswers = [responseResultsArray[index].correct_answer]
+    console.log("all answers is this : ")
+    console.log(allAnswers)
+    console.log("******")
+    for (var q in responseResultsArray[index].incorrect_answers) {
+      console.log("in nested forloop")
+      console.log("value of q is: " + q)
+      allAnswers.push(responseResultsArray[index].incorrect_answers[q])
     }
-    var quesObj = {
-      corAnswer: questions[question].correct_answer, question: questions[question].question,
+    var questionAnswerObj = {
+      questionNumber: parseInt(index) + 1,
+      question: responseResultsArray[index].question,
+      corAnswer: responseResultsArray[index].correct_answer,
       answers: allAnswers
     }
-    ans.push(quesObj)
+
+    questionAnswerSetArrayOfObjects.push(questionAnswerObj)
+    console.log("questionAnswerSetArrayOfObjects array below: ")
+    console.log(questionAnswerSetArrayOfObjects)
+    console.log("************")
+    console.log("quesObj below ")
+    console.log(questionAnswerObj)
+    console.log("******")
+
+    var questionHtml = $("<h1>")
+    $(questionHtml).text(questionAnswerSetArrayOfObjects[index].question)
+    
+
+    var answerChoicesDiv= $("<div>")
+    $(answerChoicesDiv).addClass("form-check")
+
+    for(var x in responseResultsArray[index].incorrect_answers){
+
+        var answerChoicesRadioButtons= $("<input>")
+        $(answerChoicesRadioButtons).addClass("form-check-input").attr("type", "radio").attr("name", questionAnswerSetArrayOfObjects[index].question)
+
+    }
+    
+
+
+    $(".questionAnswerContainer").append(questionHtml)
   }
 
-  $("#answers").append(`<h1>${ans[currentQuestion].question}</h1>`)
-// Ineed to complete for loop identifiers to cycle through arraty questions for game
-  for (var i in ans[currentQuestion].answers) {
-    $("#answers").append(`<div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="incorrect1" value="${ans[currentQuestion].answers}" checked>
-      <label class="form-check-label" for="exampleRadios5">
-          ${ans[currentQuestion].answers[i]}
-      </label>
-    </div>`)
-  }
+
+//   $("#answers").append(`<h1>${ans[currentindex].index}</h1>`)
+// // Ineed to complete for loop identifiers to cycle through arraty responseResultsArray for game
+//   for (var i in ans[currentindex].answers) {
+//     $("#answers").append(`<div class="form-check">
+//       <input class="form-check-input" type="radio" name="exampleRadios" id="incorrect1" value="${ans[currentindex].answers}" checked>
+//       <label class="form-check-label" for="exampleRadios5">
+//           ${ans[currentindex].answers[i]}
+//       </label>
+//     </div>`)
+//   }
 
 })
 
@@ -70,7 +109,7 @@ $(document).ready(function () {
 //       //  Timeouts in JavaScript
 //       //  Set our window alert to run one second after the function's called.
 //       var windowTimeout = setTimeout(function() {
-//         alert("You have 60 seconds to answer the questions below.");
+//         alert("You have 60 seconds to answer the responseResultsArray below.");
 //       }, 3000);
 
 //       //  Start on click.
@@ -80,3 +119,6 @@ $(document).ready(function () {
 //           alert("Times Up !");
 //         }, 60000);
 //       });
+
+
+
