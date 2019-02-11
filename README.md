@@ -5,7 +5,7 @@
 
 * This project utilizes the concepts of **API** retrievalfo r the data, **Ajax** calls to retrieve data **JavaScript** for the logic and **jQuery** to manipulate HTML.
 
-* You can begin this game by clicking Github.io link below.
+* You can begin this game by clicking Github.io link  https://keefske2000.github.io/TriviaGame/ .
 
 * Users can view the programming code used to develop this game by reviewing documenting files in https://github.com/keefske2000/TriviaGame.git .
 
